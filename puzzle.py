@@ -74,6 +74,34 @@ def extract_columns(board: list[list[str]]) -> list[list[str]]:
     return [[row[i] for row in board] for i in range(len(board))]
 
 
+def extract_l_shape(board: list[list[str]]) -> list[list[str]]:
+    '''
+    list[list[str]] -> list[list[str]]
+    Returns the list of the lists of L-shape elements
+    for 9x9 board.
+    >>> extract_l_shape([\
+['*', '*', '*', '*', ' ', '*', '*', '*', '*'], \
+['*', '*', '*', '1', ' ', '*', '*', '*', '*'], \
+['*', '*', ' ', ' ', '3', '*', '*', '*', '*'], \
+['*', ' ', '4', ' ', '1', '*', '*', '*', '*'], \
+[' ', ' ', ' ', ' ', ' ', '9', ' ', '5', ' '], \
+[' ', '6', ' ', ' ', '8', '3', ' ', ' ', '*'], \
+['3', ' ', ' ', ' ', '1', ' ', ' ', '*', '*'], \
+[' ', ' ', '8', ' ', ' ', '2', '*', '*', '*'], \
+[' ', ' ', '2', ' ', ' ', '*', '*', '*', '*']])
+    [\
+[' ', ' ', '2', ' ', ' ', ' ', '3', ' ', ' '], \
+[' ', '8', ' ', ' ', '2', ' ', '6', ' ', ' '], \
+[' ', ' ', '1', ' ', ' ', ' ', ' ', '4', ' '], \
+[' ', '8', '3', ' ', ' ', ' ', ' ', ' ', '1'], \
+[' ', '9', ' ', '5', ' ', '1', '3', ' ', ' ']]
+    '''
+    central_pos = [(i,pos) for pos, i in enumerate(range(-1, -6, -1))]
+    pos_for_l = [[cntr] + [(cntr[0], cntr[1] + i) for i in range(1,5)] + \
+                 [(cntr[0] - i, cntr[1]) for i in range(1,5)] for cntr in central_pos]
+    return [[board[coor[0]][coor[1]] for coor in shape] for shape in pos_for_l]
+
+
 def validate_board(board: list[str]) -> bool:
     pass
 
