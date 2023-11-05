@@ -30,7 +30,7 @@ def board_to_matrix(board: list[str]) -> list[list[str]]:
     return matrix
 
 
-def check_row(row: list[str]) -> bool:
+def check_for_reps(row: list[str]) -> bool:
     '''
     list[str] -> bool
     Checks whether row is suitable for board.
