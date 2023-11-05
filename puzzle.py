@@ -154,8 +154,3 @@ def validate_board(board: list[str]) -> bool:
         bool_list = [check_for_reps(list_) for list_ in lists_to_check]
         return all(bool_list)
     return None
-
-
-if __name__ == "__main__":
-    import doctest
-    print(doctest.testmod())
