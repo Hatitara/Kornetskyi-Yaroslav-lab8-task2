@@ -103,7 +103,57 @@ def extract_l_shape(board: list[list[str]]) -> list[list[str]]:
 
 
 def validate_board(board: list[str]) -> bool:
-    pass
+    '''
+    list[str] -> bool
+    Returns True if board is valid for the game,
+    else False. If the board is not the board for
+    this game, returns None.
+    >>> validate_board([\
+"**** ****", \
+"***1 ****", \
+"**  3****", \
+"* 4 1****", \
+"     9 5 ", \
+" 6  83  *", \
+"3   1  **", \
+"  8  2***", \
+"  2  ****"])
+    False
+    >>> validate_board([\
+"**** ****", \
+"***1 ****", \
+"**  3****", \
+"* 4 1****", \
+"     9 5 ", \
+" 6  83  *", \
+"3      **", \
+"  8  2***", \
+"  2  ****"])
+    True
+    >>> validate_board([\
+"**** ****", \
+"***1 ****", \
+"**  3****", \
+"* 4 1****", \
+"     9 5 ", \
+" 6  83  *", \
+"3   1  **", \
+"  8  2***", \
+"  2  ****    "])
+
+    >>> validate_board([])
+
+    >>> validate_board(9)
+    
+    '''
+    if isinstance(board, list) and len(board) == 9 and isinstance(board[0], str) \
+        and all([len(row) == 9 for row in board]):
+        matrix_board = board_to_matrix(board)
+        lists_to_check = matrix_board + \
+            extract_columns(matrix_board) + extract_l_shape(matrix_board)
+        bool_list = [check_for_reps(list_) for list_ in lists_to_check]
+        return all(bool_list)
+    return None
 
 
 if __name__ == "__main__":
