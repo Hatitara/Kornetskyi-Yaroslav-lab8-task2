@@ -146,11 +146,13 @@ def validate_board(board: list[str]) -> bool:
     >>> validate_board(9)
     
     '''
-    if isinstance(board, list) and len(board) == 9 and isinstance(board[0], str) \
-        and all([len(row) == 9 for row in board]):
-        matrix_board = board_to_matrix(board)
-        lists_to_check = matrix_board + \
-            extract_columns(matrix_board) + extract_l_shape(matrix_board)
-        bool_list = [check_for_reps(list_) for list_ in lists_to_check]
-        return all(bool_list)
+    if isinstance(board, list) and len(board) == 9 and isinstance(board[0], str):
+        bool_lst = [len(row) == 9 for row in board]
+        if all(bool_lst):
+            matrix_board = board_to_matrix(board)
+            lists_to_check = matrix_board + \
+                extract_columns(matrix_board) + extract_l_shape(matrix_board)
+            bool_list = [check_for_reps(list_) for list_ in lists_to_check]
+            return all(bool_list)
+        return None
     return None
